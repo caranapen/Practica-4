@@ -231,8 +231,9 @@ var Enemy = function(blueprint,override) {
     // En el parámetro blueprint viene la propiedad sprite, que se ha
     // añadido más arriba a este objeto. A partir de this.sprite se
     // localizan en SpriteSheet.map las dimensiones:
-    this.w = SpriteSheet.map[this.sprite].w;
-    this.h = SpriteSheet.map[this.sprite].h;
+	
+    this.w = SpriteSheet.map[this.sprite].w;  // En este ejemplo this.sprtie es enemy_purple por tanto su w = 42 px
+    this.h = SpriteSheet.map[this.sprite].h;  // y su h = 43 px
 
     // Inicializa t, que es la edad de este enemigo
     this.t = 0;
@@ -240,7 +241,7 @@ var Enemy = function(blueprint,override) {
 
 Enemy.prototype.step = function(dt) {
     // Actualizamos la edad
-    this.t += dt;
+    this.t += dt; // dt = 0.03
 
     // El patrón de movimiento lo dictan las ecuaciones que se utilizarán
     // para calcular las componentes x e y de su velocidad: vx e vy:
@@ -263,13 +264,13 @@ Enemy.prototype.step = function(dt) {
     // H: desplazamiento en el tiempo de la velocidad vertical sinusoidal
     this.vy = this.E + this.F * Math.sin(this.G * this.t + this.H);
 
-    this.x += this.vx * dt;
-    this.y += this.vy * dt;
+    this.x += this.vx * dt; // cada vez que se llama a step la posicion varia x = vx * 0.03
+    this.y += this.vy * dt; // y = vy * 0.03
 
-    if(this.y > Game.height ||
-       this.x < -this.w||
-       this.x > Game.width) {
-	this.board.remove(this);
+    if(this.y > Game.height ||   // si y del enemigo es mayor que la altura del juego o
+       this.x < -this.w||        // si x del enemigo es menor que (en este caso) -42 px o
+       this.x > Game.width) {    // si x del enemigo es mayor que el acho del juego
+	this.board.remove(this); // borramos el enemigo
     }
 }
 

@@ -1,3 +1,37 @@
+
+describe("Clase EnemySpec", function(){
+
+    var canvas, ctx;
+
+    beforeEach(function(){
+	loadFixtures('index.html');
+
+	canvas = $('#game')[0];
+	expect(canvas).toExist();
+
+	ctx = canvas.getContext('2d');
+	expect(ctx).toBeDefined();
+	var sprites = {enemy_purple: { sx: 37, sy: 0, w: 42, h: 43, frames: 1 }};
+	oldGame = Game;
+    });
+
+    afterEach(function(){
+        Game = oldGame;
+    });
+
+	/*it("step", function(){
+
+
+	var props = {x: 100, y: -50, sprite: 'enemy_purple', B: 100, C: 2 , E: 100}
+	var enemy = new Enemy(props)
+	
+	expect(enemy.w).toEqual(42);
+
+ 	})/*
+})
+
+
+
 /*
 
   Requisitos:
